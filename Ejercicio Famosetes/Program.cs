@@ -11,25 +11,30 @@ namespace Ejercicio_Famosetes
         static int contador = 0;
         static void Main(string[] args)
         {
-            string cantante, disco;
+            string cantante, disco,escape;
             List<CantanteFamoso> listasCantantesFamosos = new List<CantanteFamoso>();
             listasCantantesFamosos.Add(AñadirCantante("Extremoduro","Agila"));
             listasCantantesFamosos.Add(AñadirCantante("EoDM", "Death by Sexy"));
             do
             {
-                Console.WriteLine("Introduzca el cantante que desee añadir (para salir introduzca 0)\n");
-                cantante = Console.ReadLine();
-                Console.WriteLine("Y su disco con más ventas\n");
-                disco = Console.ReadLine();
-                if (cantante != "0" || disco != "0")
+                do
                 {
-                    listasCantantesFamosos.Add(AñadirCantante(cantante, disco));
-                }                
-            } while (cantante != "0" || disco != "0");
-            foreach (CantanteFamoso x in listasCantantesFamosos)
-            {
-                Console.WriteLine("Cantante: "+x.GetCant()+"\t\tDisco más vendido:"+x.GetDisco());
-            }
+                    Console.WriteLine("Introduzca el cantante que desee añadir (para mostrar lista introduzca 0)\n");
+                    cantante = Console.ReadLine();
+                    Console.WriteLine("Y su disco con más ventas\n");
+                    disco = Console.ReadLine();
+                    if (cantante != "0" || disco != "0")
+                    {
+                        listasCantantesFamosos.Add(AñadirCantante(cantante, disco));
+                    }
+                } while (cantante != "0" || disco != "0");
+                foreach (CantanteFamoso x in listasCantantesFamosos)
+                {
+                    Console.WriteLine("Cantante: " + x.GetCant() + "\t\tDisco más vendido:" + x.GetDisco());
+                }
+                Console.WriteLine("Para terminar de añadir cantantes a la lista introduzca 'salir', si no introduzca cualquier tecla");
+                escape = Console.ReadLine().ToUpper();
+            } while (escape!="SALIR");
             Console.ReadLine();         
         }
         public static CantanteFamoso AñadirCantante(string nombre, string discoMasVendido)
